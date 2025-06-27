@@ -1,76 +1,71 @@
 
-# ToDo App - Frontend
+# ToDo App - Backend API
 
-This is the frontend of the **ToDo App**, built with **Angular v20.0.3**. It provides a user-friendly interface to manage personal notes and user profiles, communicating seamlessly with the Java-based backend API.
+This is the backend API of the **ToDo App**, developed in Java. It handles user profile management and note-taking functionalities. The API is designed to integrate seamlessly with the Angular frontend.
 
 ## 🔧 Technologies
 
-- [Angular 20.0.3](https://angular.io/)
-- TypeScript
-- RxJS
-- SCSS / CSS3
-- Font Awesome
-- Angular Standalone APIs (no NgModules)
-- Angular Router
-- Angular Forms
+- Java (version depending on your setup)
+- Spring Boot (assumed)
+- RESTful API design
+- Maven (or Gradle)
+- JPA / Hibernate (if used)
+- Other relevant libs (specify if needed)
 
 ## 📁 Project Structure
 
 ```
-ToDo_List_Front/
-├── src/
-│   ├── app/
-│   ├── assets/
-│   └── index.html
-├── angular.json
-├── package.json
-├── tsconfig.json
-└── ...
+ToDo_List_API/
+└── ToDoList/
+    ├── src/
+    ├── target/
+    ├── pom.xml
+    └── ...
 ```
 
 ## 🚀 Getting Started
 
 ### Prerequisites
 
-- [Node.js](https://nodejs.org/) (v18 or higher)
-- [Angular CLI](https://angular.io/cli) (v20.0.3)
+- Java Development Kit (JDK) 17 or higher
+- Maven (if using Maven)
+- Git
 
 ### Installation
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/alexrsd23/ToDo_App_Frontend.git
-   cd ToDo_App_Frontend
+   git clone https://github.com/alexrsd23/ToDo_App_Backend.git
+   cd ToDoList
    ```
 
-2. Install dependencies:
+2. Build the project and download dependencies:
    ```bash
-   npm install
+   mvn clean install
    ```
 
 3. Run the application:
    ```bash
-   ng serve
+   mvn spring-boot:run
    ```
 
-4. Open your browser at:
+4. The API will be available at:
    ```
-   http://localhost:4200/
+   http://localhost:8080/
    ```
 
 ## ⚙️ Features
 
-- ✅ Create, edit and delete personal notes
-- ✅ Manage user profiles
-- ✅ Clean and responsive layout
-- ✅ Angular modern architecture with Standalone Components
-- ✅ Integration with Java Spring Boot backend API
+- ✅ User profile creation, update, and retrieval
+- ✅ Note management: create, update, delete, list notes
+- ✅ RESTful endpoints
+- ✅ Secure and scalable architecture
 
 ## 🛠️ Development Notes
 
-- This project uses Angular's **standalone component architecture** (introduced in Angular 14+).
-- HTTP requests are configured using `provideHttpClient()` instead of `HttpClientModule`.
-- Font Awesome is used for iconography.
+- The project is built with Spring Boot (or your chosen framework).
+- API endpoints are documented (consider adding Swagger/OpenAPI if not yet done).
+- Designed to integrate with the Angular frontend app.
 
 ## 📄 License
 
