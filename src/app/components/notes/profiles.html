@@ -1,0 +1,66 @@
+<!-- profile.html -->
+<div class="layout">
+  <!-- Sidebar global -->
+  <aside class="sidebar">
+    <h2 class="logo">TaskManager</h2>
+    <ul>
+      <a href="/home">Home</a>
+      <a href="/profiles" class="active">Profiles</a>
+      <a href="/notes">Notes</a>
+      <a href="/settings">Settings</a>
+    </ul>
+  </aside>
+
+  <!-- Conteúdo principal -->
+  <main class="main-content">
+    <header class="topbar">
+      <h1>Manage Profiles</h1>
+      <button class="create-btn" (click)="openDialog()">
+        <fa-icon [icon]="faPlusCircle"></fa-icon>
+        Create Profile
+      </button>
+    </header>
+    <div class="profiles-list">
+      <div class="card" *ngFor="let profile of profiles">
+        <div class="card-header">
+          <div class="left">
+            <fa-icon [icon]="faUser" class="icon"></fa-icon>
+            <ng-container *ngIf="editedProfileId !== profile.id; else editMode">
+              <h3>{{ profile.name }}</h3>
+            </ng-container>
+            <ng-template #editMode>
+              <input [(ngModel)]="editedProfileName" class="edit-input" />
+            </ng-template>
+          </div>
+          <div class="actions">
+            <ng-container *ngIf="editedProfileId === profile.id; else buttons">
+              <button (click)="saveEdit(profile.id!)" title="Save">💾</button>
+              <button (click)="cancelEdit()" title="Cancel">❌</button>
+            </ng-container>
+            <ng-template #buttons>
+              <button (click)="startEdit(profile)" title="Edit">
+                <fa-icon [icon]="faEdit" ></fa-icon>
+              </button>
+              <button (click)="deleteProfile(profile.id!)" title="Delete">
+                <fa-icon [icon]="faTrash"></fa-icon>
+              </button>
+            </ng-template>
+          </div>
+        </div>
+        <p class="note-count">Notas adicionadas: {{ profile.notes?.length || 0 }}</p>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- Modal Popup -->
+<div class="dialog-overlay" *ngIf="showDialog">
+  <div class="dialog-box">
+    <h3>Create New Profile</h3>
+    <input type="text" [(ngModel)]="profileName" placeholder="Enter profile name" />
+    <div class="dialog-actions">
+      <button class="cancel" (click)="closeDialog()">Cancel</button>
+      <button class="confirm" (click)="createProfile()">Create</button>
+    </div>
+  </div>
+</div>

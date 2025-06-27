@@ -1,0 +1,102 @@
+<div class="layout">
+  <aside class="sidebar">
+    <h2 class="logo">TaskManager</h2>
+    <ul>
+      <a href="/home">Home</a>
+      <a href="/profiles">Profiles</a>
+      <a href="/notes" class="active">Notes</a>
+      <a href="/settings">Settings</a>
+    </ul>
+  </aside>
+
+  <main class="main-content">
+    <!-- Show profile selector if none selected -->
+    <div *ngIf="!selectedProfileId" class="select-profile-container">
+      <h2>Select your user</h2>
+      <select [(ngModel)]="selectedProfileId" (change)="onSelectProfile($event)">
+        <option value="" disabled>Choose a user</option>
+        <option *ngFor="let profile of profiles" [value]="profile.id">{{ profile.name }}</option>
+      </select>
+    </div>
+
+    <!-- Show task panel if a profile is selected -->
+    <div *ngIf="selectedProfileId" class="task-panel">
+      <header class="header">
+        <div class="user-card">
+          <h2>{{ getSelectedProfileName() }}</h2>
+          <div class="counters">
+            <span>To Do: {{ countToDo() }}</span>
+            <span>In Progress: {{ countInProgress() }}</span>
+            <span>Done: {{ countDone() }}</span>
+          </div>
+        </div>
+        <button class="create-task-btn" (click)="onCreateNewTask()">Create New Task</button>
+      </header>
+
+      <section class="columns">
+        <div class="column" cdkDropList id="TO_DO" [cdkDropListData]="toDoNotes"
+          [cdkDropListConnectedTo]="['IN_PROGRESS', 'DONE']" (cdkDropListDropped)="onDrop($event, 'TO_DO')">
+          <h3>To Do</h3>
+          <div *ngIf="toDoNotes.length === 0">No tasks.</div>
+          <div *ngFor="let note of toDoNotes" class="note-card" cdkDrag [cdkDragData]="note">
+            <h4>{{ note.title }}</h4>
+            <p>{{ note.description }}</p>
+            <small>Start: {{ note.startDate | date }}</small><br />
+            <small>End: {{ note.endDate | date }}</small>
+
+            <div class="note-actions">
+              <button (click)="editNote(note)"  id="edit-btn"><fa-icon [icon]="faEdit" ></fa-icon></button>
+              <button (click)="deleteNote(note)"><fa-icon [icon]="faTrash"></fa-icon></button>
+            </div>
+          </div>
+        </div>
+
+        <div class="column" cdkDropList id="IN_PROGRESS" [cdkDropListData]="inProgressNotes"
+          [cdkDropListConnectedTo]="['TO_DO', 'DONE']" (cdkDropListDropped)="onDrop($event, 'IN_PROGRESS')">
+          <h3>In Progress</h3>
+          <div *ngIf="inProgressNotes.length === 0">No tasks.</div>
+          <div *ngFor="let note of inProgressNotes" class="note-card" cdkDrag [cdkDragData]="note">
+            <h4>{{ note.title }}</h4>
+            <p>{{ note.description }}</p>
+            <small>Start: {{ note.startDate | date }}</small><br />
+            <small>End: {{ note.endDate | date }}</small>
+          </div>
+        </div>
+
+        <div class="column" cdkDropList id="DONE" [cdkDropListData]="doneNotes"
+          [cdkDropListConnectedTo]="['TO_DO', 'IN_PROGRESS']" (cdkDropListDropped)="onDrop($event, 'DONE')">
+          <h3>Done</h3>
+          <div *ngIf="doneNotes.length === 0">No tasks.</div>
+          <div *ngFor="let note of doneNotes" class="note-card" cdkDrag [cdkDragData]="note">
+            <h4>{{ note.title }}</h4>
+            <p>{{ note.description }}</p>
+            <small>Start: {{ note.startDate | date }}</small><br />
+            <small>End: {{ note.endDate | date }}</small>
+          </div>
+        </div>
+      </section>
+
+      <!-- Create Task Modal -->
+      <div class="dialog-overlay" *ngIf="showCreateModal">
+        <div class="dialog-box">
+          <h3>Create New Task</h3>
+
+          <input type="text" placeholder="Title" [(ngModel)]="newNote.title" />
+          <input type="text" placeholder="Description" [(ngModel)]="newNote.description" />
+          <input type="date" placeholder="Start" [(ngModel)]="newNote.startDate" />
+          <input type="date" placeholder="End" [(ngModel)]="newNote.endDate" />
+          <select [(ngModel)]="newNote.status">
+            <option value="TO_DO">To Do</option>
+            <option value="IN_PROGRESS">In Progress</option>
+            <option value="DONE">Done</option>
+          </select>
+
+          <div class="dialog-actions">
+            <button class="cancel" (click)="closeCreateModal()">Cancel</button>
+            <button class="confirm" (click)="submitNewNote()">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
