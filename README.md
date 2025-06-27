@@ -1,59 +1,77 @@
-# ToDoListFront
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.0.3.
+# ToDo App - Frontend
 
-## Development server
+This is the frontend of the **ToDo App**, built with **Angular v20.0.3**. It provides a user-friendly interface to manage personal notes and user profiles, communicating seamlessly with the Java-based backend API.
 
-To start a local development server, run:
+## 🔧 Technologies
 
-```bash
-ng serve
+- [Angular 20.0.3](https://angular.io/)
+- TypeScript
+- RxJS
+- SCSS / CSS3
+- Font Awesome
+- Angular Standalone APIs (no NgModules)
+- Angular Router
+- Angular Forms
+
+## 📁 Project Structure
+
+```
+ToDo_List_Front/
+├── src/
+│   ├── app/
+│   ├── assets/
+│   └── index.html
+├── angular.json
+├── package.json
+├── tsconfig.json
+└── ...
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## 🚀 Getting Started
 
-## Code scaffolding
+### Prerequisites
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+- [Node.js](https://nodejs.org/) (v18 or higher)
+- [Angular CLI](https://angular.io/cli) (v20.0.3)
 
-```bash
-ng generate component component-name
-```
+### Installation
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/alexrsd23/ToDo_App_Frontend.git
+   cd ToDo_App_Frontend
+   ```
 
-```bash
-ng generate --help
-```
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-## Building
+3. Run the application:
+   ```bash
+   ng serve
+   ```
 
-To build the project run:
+4. Open your browser at:
+   ```
+   http://localhost:4200/
+   ```
 
-```bash
-ng build
-```
+## ⚙️ Features
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+- ✅ Create, edit and delete personal notes
+- ✅ Manage user profiles
+- ✅ Clean and responsive layout
+- ✅ Angular modern architecture with Standalone Components
+- ✅ Integration with Java Spring Boot backend API
 
-## Running unit tests
+## 🛠️ Development Notes
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+- This project uses Angular's **standalone component architecture** (introduced in Angular 14+).
+- HTTP requests are configured using `provideHttpClient()` instead of `HttpClientModule`.
+- Font Awesome is used for iconography.
 
-```bash
-ng test
-```
+## 📄 License
 
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+MIT © [alexrsd23](https://github.com/alexrsd23)
